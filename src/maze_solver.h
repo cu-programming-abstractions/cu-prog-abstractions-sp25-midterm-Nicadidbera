@@ -1,6 +1,7 @@
 #pragma once
 #include "maze.h"
 #include <vector>
+#include <utility> // for std::pair
 
 using namespace std;
 
@@ -11,5 +12,5 @@ public:
 
 private:
     // recursive helper for DFS with backtracking.
-    bool dfs(Maze& maze, int r, int c, vector<vector<bool>>& visited); // TODO
+    bool dfs(Maze& maze, int r, int c, vector<vector<bool>>& visited);
 };

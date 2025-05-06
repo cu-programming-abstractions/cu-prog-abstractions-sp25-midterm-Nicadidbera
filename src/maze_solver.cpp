@@ -3,19 +3,30 @@
 using namespace std;
 
 bool MazeSolver::dfs(Maze& maze, int r, int c, vector<vector<bool>>& visited) {
-    /* TODO: Implement recursive DFS with backtracking.
+    if (r < 0 || r >= static_cast<int>(maze.grid.size()) ||
+        c < 0 || c >= static_cast<int>(maze.grid[0].size()) ||
+        maze.grid[r][c] == '#' || visited[r][c]) {
+        return false;
+    }
 
-    Suggested steps:
-    1. Guard   – out of bounds, wall, or already visited ➔ return false
-    2. Goal    – if (r,c) == finish, add to path and return true
-    3. Mark    – visited[r][c] = true
-    4. Explore – recursively call dfs on N,E,S,W
-    5. Success – if any recursive call returns true, push current cell onto
-                 maze.path and return true
-    6. Fail    – otherwise return false
-    */
+    if (maze.grid[r][c] == 'F') {
+        maze.path.push_back({r, c});
+        return true;
+    }
+    visited[r][c] = true;
 
-    // TODO: Your implementation here
+    const int dr[] = {-1, 0, 1, 0};
+    const int dc[] = {0, 1, 0, -1};
+
+    for (int i = 0; i < 4; i++) {
+        int new_r = r + dr[i];
+        int new_c = c + dc[i];
+
+        if (dfs(maze, new_r, new_c, visited)) {
+            maze.path.push_back({r, c});
+            return true;
+        }
+    }
     return false;
 }
 
